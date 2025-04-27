@@ -1,0 +1,59 @@
+### testing 
+GET http://127.0.0.1:8000/api/u
+Accept: application/json
+
+
+###  login
+Post http://127.0.0.1:8000/api/
+Accept: application/json
+Content-Type: application/json
+
+{
+    "email":"eljid@gmail.com",
+    "password":"12345678"
+}
+
+### logout
+
+Post http://127.0.0.1:8000/api/logout
+Accept: application/json
+Authorization: Bearer 6|HDuZYjcJ4WREEjAdsLh2uKYylo7skkzXNnHv3dD02ce03659
+Content-Type: application/json
+
+###
+
+GET http://127.0.0.1:8000/api/documents
+Accept: application/json
+Content-Type: application/json
+Authorization: Bearer 8|J5EyE7pDJ9sr42DCDGNdpnn2qUTw5CYoDU8UvRN3fff912ef
+
+
+### 
+
+Post http://127.0.0.1:8000/api/documents
+Accept: application/json
+Authorization: Bearer 8|J5EyE7pDJ9sr42DCDGNdpnn2qUTw5CYoDU8UvRN3fff912ef
+Content-Type: application/json
+
+{
+    "document_name":"first seeder test",
+    "description":"this is my first document ",
+    "file_path":"sorage/public/test_file.pdf",
+    "remind_me_befor":"28-04-25",
+    "file_path":"hello"
+
+
+    
+        
+}
+
+# Post http://127.0.0.1:8000/api/
+# Accept: application/json
+# Content-Type: application/json
+
+# {
+#     "email":"eljid@gmail.com",
+#     "password":"12345678"
+# }
+
+
