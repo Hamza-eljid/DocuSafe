@@ -21,9 +21,12 @@ class AuthController extends Controller
         
     );
     $user = User::where('email',$fields['email'])->first();
-    if(!$user || ! Hash::make($fields['password'])== $user->password){
-        return response()->json(["status"=>404,"message "=>"user is not exist"]);
+    
+
+    if(!$user ||  !Hash::check($fields['password'],$user->password) ){
+        return response()->json(["status"=>404,"message "=>"user not exist"]);
     }
+    
 
     $token = $user->createToken('DocuSafe')->plainTextToken;
 
@@ -43,4 +46,21 @@ class AuthController extends Controller
     
     return response()->json(["message"=>"logout with success"]);
  }
+
+ public function Register (Request $request){
+
+    $fields = $request->validate([
+        'name'=>'required',
+        'email'=>'required',
+        'password'=>'required'
+
+    ]);
+
+    User::create($fields);
+
+    return response()->json(["message"=>"added successfuly"]);
+
+ }
+
+
 }
