@@ -98,6 +98,8 @@ class DocumentController extends Controller
             $document->expiring_date = $fields['expiring_date'];
         }
 
+        $document->save();
+
         return response()->json($document);
 
     }
@@ -108,7 +110,7 @@ class DocumentController extends Controller
     public function destroy(Request $request)
     {
         $document = Document::find($request->id);
-        
+
         $user_id = $request->user()->id;
         
         if($user_id != $document->user_id ){
