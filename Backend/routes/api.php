@@ -13,8 +13,8 @@ Route::get('/user', function (Request $request) {
 Route::get('/u',function(){
     $all = DB::table('users')->get();
     return response()->json($all);
-})
-;
+});
+
 Route::post('/', [AuthController::class,'login']);
 
 Route::middleware('auth:sanctum')->post('/logout', [AuthController::class,'logout']);
@@ -22,3 +22,7 @@ Route::middleware('auth:sanctum')->post('/logout', [AuthController::class,'logou
 Route::middleware('auth:sanctum')->get('/documents',[DocumentController::class,'index']);
 
 Route::middleware('auth:sanctum')->post('/documents',[DocumentController::class,'store']);
+
+Route::middleware('auth:sanctum')->put('/documents',[DocumentController::class,'update']);
+
+Route::middleware('auth:sanctum')->delete('/documents',[DocumentController::class,'destroy']);
