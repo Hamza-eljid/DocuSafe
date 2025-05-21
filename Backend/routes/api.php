@@ -33,3 +33,31 @@ Route::middleware('auth:sanctum')->delete('/documents',[DocumentController::clas
 Route::middleware('auth:sanctum')->put('/user',[UserController::class,'update']);
 
 Route::middleware('auth:sanctum')->delete('/user',[UserController::class,'destroy']);
+
+Route::post('/contact',function(Request $request){
+    $user_attempt = DB::table('Contact')->where("gest_email",$request->email)->count();
+
+    if($user_attempt >= 2){
+         return response()->json([
+            "message"=>"can't send an other message the limit is 2"
+         ]) ;
+    }
+    DB::table('Contact')->insert([
+        "gest_name" => $request->nom,
+        "gest_email" => $request->email,
+        "gest_description" => $request->description
+    ]);
+
+    if( $user_attempt == 0){
+             return response()->json([
+        "message"=>"message sent with succsess you still have 1 attempt rest"
+        
+        ]) ;
+    }else{
+         return response()->json([
+                "message"=>"message sent with succsess you dont have any attempt lift"
+        ]) ;
+    }
+
+   
+});
