@@ -1,0 +1,63 @@
+/* Conteneur général du header */
+.header {
+  width: 100%;
+  background-color: var(--main-color);
+  padding: 10px 20px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+/* Contenu centré dans le header */
+.container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* Logo à gauche */
+.logo {
+  font-size: 1.5rem;
+  font-weight: bold;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  color: var(--light-color);
+}
+
+/* Liste à droite */
+.list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+/* Élément contenant image + nom */
+.page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: #e9ecef; /* même couleur pour l'image et le nom */
+  padding: 8px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.page:hover {
+  background-color: #dee2e6;
+}
+
+/* Image de profil */
+.profile_img {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-bottom: 4px;
+}
+
+/* Nom de l'utilisateur */
+.user_name {
+  font-size: 13px;
+  color: #333;
+  margin: 0;
+}

@@ -65,4 +65,15 @@ Content-Type: application/json
     
         
 }
+###
+post http://127.0.0.1:8000/api/user
+Accept: application/json
+Authorization: Bearer 8|J5EyE7pDJ9sr42DCDGNdpnn2qUTw5CYoDU8UvRN3fff912ef
+Content-Type: application/json
+
+{
+    "id":2
+  
+}
+
 

@@ -30,6 +30,8 @@ Route::middleware('auth:sanctum')->put('/documents',[DocumentController::class,'
 
 Route::middleware('auth:sanctum')->delete('/documents',[DocumentController::class,'destroy']);
 
+Route::middleware('auth:sanctum')->post('/user',[UserController::class,'index']);
+
 Route::middleware('auth:sanctum')->put('/user',[UserController::class,'update']);
 
 Route::middleware('auth:sanctum')->delete('/user',[UserController::class,'destroy']);

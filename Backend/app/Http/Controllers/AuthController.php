@@ -24,7 +24,7 @@ class AuthController extends Controller
     
 
     if(!$user ||  !Hash::check($fields['password'],$user->password) ){
-        return response()->json(["status"=>404,"message "=>"user not exist"]);
+        return response()->json(["status"=>404,"message"=>"user not exist"]);
     }
     
 

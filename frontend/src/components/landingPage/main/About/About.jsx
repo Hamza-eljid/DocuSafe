@@ -1,6 +1,7 @@
 import React from "react";
 import Saftyicon from "../../../../assets/saftyicon.png";
 import styles from "./About.module.css"
+import { useNavigate } from "react-router-dom";
 export default function About() {
   return (
     <>
