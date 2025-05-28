@@ -1,0 +1,36 @@
+.container{
+    max-width: 1200px;
+    margin-inline: auto;
+    padding: 1rem;
+}
+
+
+.ulWrapper {
+  display: flex;
+  justify-content: center;
+}
+
+.ul {
+  display: flex;
+  gap: 1rem;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.ul li {
+  background-color: #007bff; /* Blue Primary */
+  color: white;
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+  font-weight: 500;
+  user-select: none;
+}
+
+.ul li:hover {
+  background-color: #0056b3; /* Darker blue on hover */
+}
+
+

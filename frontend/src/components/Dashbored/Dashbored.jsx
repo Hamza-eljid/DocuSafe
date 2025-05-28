@@ -7,7 +7,7 @@ export default function Dashbored() {
   const navigate = useNavigate();
   const { user, getuserinfo, logout } = useUserContext();
 
-  console.log(localStorage.getItem("authentificated"));
+  
   useEffect(() => {
     if (
       !localStorage.getItem("authentificated") == "true"

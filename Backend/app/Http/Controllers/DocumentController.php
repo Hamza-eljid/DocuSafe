@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Document;
+use Illuminate\Container\Attributes\Auth;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
@@ -11,9 +12,10 @@ class DocumentController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $document = Document::all();
+        $id =$request->user()->id;
+        $document = Document::where('user_id',$id)->get();
         return response()->json($document);
 
     }
@@ -32,9 +34,11 @@ class DocumentController extends Controller
             'expiring_date'=>'required'
         ]);
 
-        $filePath = $request->file('file')->store('documents', 'public');
-        $filePath = Storage::url($filePath);
-        $fields['file_path'] = $filePath ;
+       
+        
+       $storagePath = $request->file('file')->store('documents', 'public'); 
+            // $storagePath will be something like "documents/NDL8h2ZhoManfB350qmI8EUXVLQGba0RXIjIxUUH.pdf"
+        $fields['file_path'] = $storagePath;
 
 
         $fields['user_id'] = $request->user()->id;
@@ -42,9 +46,13 @@ class DocumentController extends Controller
         $fields['valid'] = true;
         
 
-        Document::create($fields);
+        $doc =Document::create($fields);
+                return response()->json($doc);
+
 
         return response()->json(["message"=>"created successfuly"]);
+
+
     }
 
   
@@ -82,13 +90,11 @@ class DocumentController extends Controller
             $document->description = $fields['description'];
         }
 
-        if(array_key_exists('file', $fields)){
-            $oldfile = str_replace('/storage/', '', parse_url($document->file_url, PHP_URL_PATH));
-            Storage::disk('public')->delete($oldfile);
-            $filePath = $request->file('file')->store('documents', 'public');
-            $filePath = Storage::url($filePath);
-            $document->file_path = $filePath;
-        }
+        // if(array_key_exists('file', $fields)){
+        //     $storagePath = $request->file('file')->store('documents', 'public'); 
+        //     // $storagePath will be something like "documents/NDL8h2ZhoManfB350qmI8EUXVLQGba0RXIjIxUUH.pdf"
+        //     $document->file_path = $storagePath;
+        // }
 
         if(array_key_exists('remind_me_befor', $fields)){
             $document->remind_me_befor = $fields['remind_me_befor'];
@@ -107,18 +113,35 @@ class DocumentController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Request $request)
+    public function destroy($id)
     {
-        $document = Document::find($request->id);
-
-        $user_id = $request->user()->id;
         
-        if($user_id != $document->user_id ){
-            return response()->json([
-                "message" =>  "operation denied you are not allowed to do this operation"
-            ]);
-        };
-        $res = Document::destroy($request->id);
-        return response()->json($res);
+
+        $res = Document::destroy($id);
+        return response()->json([
+            "ress"=>"deleted with succsess",
+            "data "=>$res
+        ]);
+    }
+
+    public function upload (Request $request){
+        $id = $request->id;
+        $document = Document::find($id);
+        // if(Storage::disk('local')->exists('documents/');
+
+        //  Storage::download($document->file_path);
+
+        // $path = str_replace('/storage/', '', $document->file_path); 
+        return Storage::disk('public')->download($document->file_path);
+
+        // return response()->json($document);
+    }
+
+    public function get_one(Request $request){
+        $id =$request->id;
+
+        $document = Document::find($id);
+        return response()->json($document);
+
     }
 }

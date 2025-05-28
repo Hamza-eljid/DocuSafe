@@ -20,6 +20,7 @@ Accept: application/json
 Authorization: Bearer 6|HDuZYjcJ4WREEjAdsLh2uKYylo7skkzXNnHv3dD02ce03659
 Content-Type: application/json
 
+
 ###
 
 GET http://127.0.0.1:8000/api/documents
@@ -38,9 +39,7 @@ Content-Type: application/json
 {
     "document_name":"first seeder test",
     "description":"this is my first document ",
-    "file_path":"sorage/public/test_file.pdf",
     "remind_me_befor":"28-04-25",
-    "file_path":"hello"
 
 
     

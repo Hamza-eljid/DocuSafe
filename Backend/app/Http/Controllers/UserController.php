@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class UserController extends Controller
 {
@@ -22,10 +23,10 @@ class UserController extends Controller
     public function update(Request $request)
     {
         $fields = $request->validate([
-            'name'=>'nullable',
-            'email'=>'nullable',
-            'password'=>'nullable',
-            'img_path'=>'nullable',
+            'name'=>'required',
+            'email'=>'required',
+            'password'=>'required',
+            'file'=>'nullable',
             'whatsapp_number'=>'nullable',
             'phone_number'=>'nullable',
         ]);
@@ -47,8 +48,10 @@ class UserController extends Controller
             $user->password = $fields['password'];
         }
 
-        if(array_key_exists('img_path', $fields)){
-            $user->img_path = $fields['img_path'];
+        if(array_key_exists('file', $fields)){
+            $filePath = $request->file('file')->store('users', 'public');
+            $filePath = Storage::url($filePath);
+             $user->img_path = $filePath;
         }
 
         if(array_key_exists('whatsapp_number', $fields)){

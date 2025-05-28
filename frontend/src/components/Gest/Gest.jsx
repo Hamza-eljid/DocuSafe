@@ -6,7 +6,6 @@ import Header from './Header/Header'
 export default function Gest() {
   const navigate =useNavigate()
   useEffect(() => {
-      console.log(localStorage.getItem("authentificated"));
   
       if (
         localStorage.getItem("authentificated") == "true"  

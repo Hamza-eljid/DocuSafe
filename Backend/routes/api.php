@@ -22,17 +22,25 @@ Route::post('/register', [AuthController::class,'Register']);
 
 Route::middleware('auth:sanctum')->post('/logout', [AuthController::class,'logout']);
 
-Route::middleware('auth:sanctum')->get('/documents',[DocumentController::class,'index']);
+Route::middleware('auth:sanctum')->patch('/documents',[DocumentController::class,'index']);
+
+Route::middleware('auth:sanctum')->post('/document',[DocumentController::class,'get_one']);
+
+
+
 
 Route::middleware('auth:sanctum')->post('/documents',[DocumentController::class,'store']);
 
 Route::middleware('auth:sanctum')->put('/documents',[DocumentController::class,'update']);
 
-Route::middleware('auth:sanctum')->delete('/documents',[DocumentController::class,'destroy']);
+Route::middleware('auth:sanctum')->delete('/documents/{id}',[DocumentController::class,'destroy']);
 
-Route::middleware('auth:sanctum')->post('/user',[UserController::class,'index']);
+Route::middleware('auth:sanctum')->post('/documents_up',[DocumentController::class,'upload']);
 
-Route::middleware('auth:sanctum')->put('/user',[UserController::class,'update']);
+
+Route::middleware('auth:sanctum')->put('/user',[UserController::class,'index']);
+
+Route::middleware('auth:sanctum')->post('/user',[UserController::class,'update']);
 
 Route::middleware('auth:sanctum')->delete('/user',[UserController::class,'destroy']);
 
